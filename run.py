@@ -18,12 +18,6 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('word_triad')
 
-scramble = SHEET.worksheet('scramble')
-
-data = scramble.get_all_values()
-
-print(data)
-
 
 def print_menu():
     print(Fore.BLUE + "Welcome to the " + Fore.RED + "WORD TRIAD GAME" + Fore.BLUE + " menu!\n" + Style.RESET_ALL)
@@ -32,6 +26,14 @@ def print_menu():
     print("2. Hangman Game")
     print("3. Guessing Game")
     print("4. Exit\n")
+
+
+#https://rb.gy/w1qy2
+def load_words_from_google_sheets(sheet_name):
+    worksheet = SHEET.worksheet(sheet_name)
+    data = worksheet.get_all_records()
+    words_df = pd.DataFrame(data)
+    return words_df
 
 
 while True:
