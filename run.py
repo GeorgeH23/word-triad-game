@@ -4,6 +4,8 @@
 
 import gspread 
 from google.oauth2.service_account import Credentials
+import pandas as pd
+from colorama import Fore, Style
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -21,3 +23,15 @@ scramble = SHEET.worksheet('scramble')
 data = scramble.get_all_values()
 
 print(data)
+
+
+def print_menu():
+    print(Fore.BLUE + "Welcome to the " + Fore.RED + "WORD TRIAD GAME" + Fore.BLUE + " menu!\n" + Style.RESET_ALL)
+    print(Fore.BLUE + "Please, choose a game by typing the corresponding number:" + Style.RESET_ALL)
+    print("1. Scramble Game")
+    print("2. Hangman Game")
+    print("3. Guessing Game")
+    print("4. Exit")
+
+
+print_menu()
