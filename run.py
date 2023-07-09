@@ -6,6 +6,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
 from colorama import Fore, Style
+import random
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -34,6 +35,45 @@ def load_words_from_google_sheets(sheet_name):
     data = worksheet.get_all_records()
     words_df = pd.DataFrame(data)
     return words_df
+
+
+def play_scramble_game():
+    words_df = load_words_from_google_sheets("scramble")
+
+    print(Fore.YELLOW + "Welcome to Scramble Game!" + Style.RESET_ALL)
+    print("Unscramble the word to earn points.")
+    print("Enter 'quit' to exit the game.")
+
+    #Track the words that have already been used in the game, for unique gameplay experience.
+    used_words = set()
+    score = 0
+
+    #Retrive data from the 'words' column from the google sheet and stores the words as a list
+    words = words_df["words"].tolist()
+
+    while True:
+        if len(used_words) == len(words):
+            print(Fore.GREEN + "You have unscrambled all the words!" + Style.RESET_ALL)
+            break
+    
+        word = random.choice(words)
+        while word in used_words:
+            word = random.choice(words)
+
+        used_words.add(word)
+
+        guess = input("Enter your guess: ").lower()
+
+        if guess == "quit":
+            break
+
+        if guess == word:
+            score += 1
+            print(Fore.GREEN + "Correct! Your score is", score, Style.RESET_ALL)
+        else:
+            print(Fore.RED + "Incorrect! The correct word is", word, Style.RESET_ALL)
+
+    print("Thanks for playing! Your final score is", score)
 
 
 while True:
