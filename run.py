@@ -37,6 +37,12 @@ def load_words_from_google_sheets(sheet_name):
     return words_df
 
 
+def scramble_word(word):
+    scrambled = list(word)
+    random.shuffle(scrambled)
+    return ''.join(scrambled)
+
+
 def play_scramble_game():
     words_df = load_words_from_google_sheets("scramble")
 
@@ -61,7 +67,8 @@ def play_scramble_game():
             word = random.choice(words)
 
         used_words.add(word)
-
+        scrambled_word = scramble_word(word)
+        
         guess = input("Enter your guess: ").lower()
 
         if guess == "quit":
