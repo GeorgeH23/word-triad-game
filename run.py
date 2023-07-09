@@ -37,6 +37,24 @@ def load_words_from_google_sheets(sheet_name):
     return words_df
 
 
+def choose_difficulty(difficulties):
+    print("Categories:")
+    for i, difficulty in enumerate(difficulties):
+        print(f"{i+1}. {difficulty}")
+
+    while True:
+        difficulty_choice = input("Choose a difficulty level (1-{}): ".format(len(difficulties)))
+
+        if difficulty_choice == "quit":
+            return None
+
+        #check if the difficulty choise is a valid input
+        if difficulty_choice.isdigit() and int(difficulty_choice) in range(1, len(difficulties) + 1):
+            return difficulties[int(difficulty_choice) - 1]
+
+        print("Invalid difficulty choice! Please choose a number between 1 and {}.".format(len(difficulties)))
+
+
 def scramble_word(word):
     scrambled = list(word)
     random.shuffle(scrambled)
