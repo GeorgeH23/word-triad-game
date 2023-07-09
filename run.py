@@ -2,7 +2,7 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
-import gspread 
+import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
 from colorama import Fore, Style
@@ -31,7 +31,21 @@ def print_menu():
     print("1. Scramble Game")
     print("2. Hangman Game")
     print("3. Guessing Game")
-    print("4. Exit")
+    print("4. Exit\n")
 
 
-print_menu()
+while True:
+    print_menu()
+    choice = input("Enter your choice (1-4): ")
+
+    if choice == "1":
+        play_scramble_game()
+    elif choice == "2":
+        play_hangman_game()
+    elif choice == "3":
+        play_guessing_game()
+    elif choice == "4":
+        print(Fore.BLUE + "Goodbye!" + Style.RESET_ALL)
+        break
+    else:
+        print("Invalid choice! Please enter a number between 1 and 4.")
