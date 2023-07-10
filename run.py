@@ -161,12 +161,34 @@ def play_hangman_game():
             guessed_letters = set()
             attempts = len(word)
 
-            print("\nWord to guess:", Fore.YELLOW + hidden_word + Style.RESET_ALL)
-            print(Fore.BLUE + "Enter 'quit' to exit the game." + Style.RESET_ALL)
-            print(Fore.BLUE + "Total attempts:", Fore.RED + str(len(word)) + Style.RESET_ALL)
+            print(f"\n{Fore.BLUE}Enter 'quit' to exit the game.{Style.RESET_ALL}")
+            print(f"{Fore.BLUE}Total attempts: {len(word)}\n{Style.RESET_ALL}")
 
-            print("Guessed letters:", Fore.YELLOW + ", ".join(guessed_letters) + Style.RESET_ALL)
-            print("Attempts remaining:", Fore.RED + str(attempts) + Style.RESET_ALL)
+            while attempts > 0:
+                print(f"Attempts remaining: {Fore.RED}{attempts}{Style.RESET_ALL}")
+                print(f"Guessed letters: {Fore.YELLOW}{', '.join(guessed_letters)}{Style.RESET_ALL}")
+                print(f"Word to guess: {Fore.YELLOW}{hidden_word}{Style.RESET_ALL}")
+                guess = input("Enter your guess: ").lower()
+
+                if guess == "quit":
+                    return
+
+                if guess in guessed_letters:
+                    print(f"\n{Fore.YELLOW}You already guessed that letter!\n{Style.RESET_ALL}")
+                elif guess.isalpha() and len(guess) == 1:
+                    guessed_letters.add(guess)
+                    if guess in word:
+                        hidden_word = display_word(word, guessed_letters)
+                        print(f"\n{Fore.GREEN}Correct guess! Word: {Fore.YELLOW}{hidden_word}\n{Style.RESET_ALL}")
+                        if "_" not in hidden_word:
+                            score += 1
+                            print(f"{Fore.GREEN}You've guessed the word correctly! Your score is {score}\n{Style.RESET_ALL}")
+                            break
+                    else:
+                        attempts -= 1
+                        print(f"{Fore.RED}Incorrect guess! Word: {Fore.YELLOW}{hidden_word}{Style.RESET_ALL}")
+                else:
+                    print(f"\n{Fore.YELLOW}Invalid input! Please enter a single letter.\n{Style.RESET_ALL}")
 
     play_game()
 
