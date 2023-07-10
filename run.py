@@ -66,7 +66,7 @@ def play_scramble_game():
     difficulties = words_df["difficulty"].unique()
 
     print(Fore.BLUE + "\nWelcome to " + Fore.RED + "Scramble Game!" + Style.RESET_ALL)
-    print(Fore.BLUE + "Unscramble the word to earn points." + Style.RESET_ALL)
+    print(Fore.BLUE + "Unscramble the word to earn points.\n" + Style.RESET_ALL)
     #print(Fore.BLUE + "Enter 'quit' to exit the game.\n" + Style.RESET_ALL)
 
     selected_difficulty = choose_difficulty(difficulties)
