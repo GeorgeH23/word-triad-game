@@ -129,6 +129,15 @@ def play_hangman_game():
 
     selected_difficulty = choose_difficulty(difficulties)
 
+    def play_game():
+        difficulty_words = words_df[words_df["difficulty"] == selected_difficulty]
+        words = difficulty_words["words"].tolist()
+
+        used_words = set()
+        score = 0
+
+    play_game()
+
 
 def main_fcn():
     while True:
