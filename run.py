@@ -148,7 +148,14 @@ def play_hangman_game():
             used_words.add(word)
             hidden_word = "_" * len(word)
             guessed_letters = set()
-            attempts = 6          
+            attempts = len(word)
+
+            print("\nWord to guess:", Fore.YELLOW + hidden_word + Style.RESET_ALL)
+            print(Fore.BLUE + "Enter 'quit' to exit the game." + Style.RESET_ALL)
+            print(Fore.BLUE + "Total attempts:", Fore.RED + str(len(word)) + Style.RESET_ALL)
+
+            print("Guessed letters:", Fore.YELLOW + ", ".join(guessed_letters) + Style.RESET_ALL)
+            print("Attempts remaining:", Fore.RED + str(attempts) + Style.RESET_ALL)
 
     play_game()
 
