@@ -120,6 +120,16 @@ def play_scramble_game():
     play_game()
 
 
+def play_hangman_game():
+    words_df = load_words_from_google_sheets("hangman")
+    difficulties = words_df["difficulty"].unique()
+
+    print(Fore.BLUE + "\nWelcome to " + Fore.RED + "Hangman Game!" + Style.RESET_ALL)
+    print(Fore.BLUE + "Guess the word to win!\n" + Style.RESET_ALL)
+
+    selected_difficulty = choose_difficulty(difficulties)
+
+
 def main_fcn():
     while True:
         print_menu()
