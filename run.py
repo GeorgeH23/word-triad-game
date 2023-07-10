@@ -63,17 +63,23 @@ def scramble_word(word):
 
 def play_scramble_game():
     words_df = load_words_from_google_sheets("scramble")
+    difficulties = words_df["difficulty"].unique()
 
     print(Fore.YELLOW + "Welcome to Scramble Game!" + Style.RESET_ALL)
     print("Unscramble the word to earn points.")
     print("Enter 'quit' to exit the game.")
 
+    selected_difficulty = choose_difficulty(difficulties)
+
+    #Filter the words from google sheet based on the selected difficulty level
+    difficulty_words = words_df[words_df["difficulty"] == selected_difficulty]
+
+    #Retrive data from the 'words' column from the google sheet and stores the words as a list
+    words = difficulty_words["words"].tolist()
+
     #Track the words that have already been used in the game, for unique gameplay experience.
     used_words = set()
     score = 0
-
-    #Retrive data from the 'words' column from the google sheet and stores the words as a list
-    words = words_df["words"].tolist()
 
     while True:
         if len(used_words) == len(words):
@@ -86,7 +92,8 @@ def play_scramble_game():
 
         used_words.add(word)
         scrambled_word = scramble_word(word)
-        
+
+        print("Scrambled word:", Fore.YELLOW + scrambled_word + Style.RESET_ALL)
         guess = input("Enter your guess: ").lower()
 
         if guess == "quit":
