@@ -83,20 +83,9 @@ def play_scramble_game():
 
     while True:
         if len(used_words) == len(words):
-            print(Fore.GREEN + "\nYou have unscrambled all the words!\n" + Style.RESET_ALL)
-            while True:
-                next_action = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
-                if next_action == "play":
-                    # Reset the game and continue playing
-                    used_words = set()
-                    score = 0
-                    break
-                elif next_action == "menu":
-                    # Go back to the menu
-                    return
-                else:
-                    print(Fore.YELLOW + "\nInvalid input! Please enter 'play' or 'menu'." + Style.RESET_ALL)
-    
+            print(Fore.GREEN + "\nYou have unscrambled all the words!" + Style.RESET_ALL)
+            break
+
         word = random.choice(words)
         while word in used_words:
             word = random.choice(words)
@@ -116,7 +105,20 @@ def play_scramble_game():
         else:
             print(Fore.RED + "Incorrect! The correct word is", word, Style.RESET_ALL)
 
-    print("Thanks for playing! Your final score is", score)
+    print(f"{Fore.GREEN}Thanks for playing! Your final score is {score}{Style.RESET_ALL}\n")
+
+    while True:
+        next_action = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
+        if next_action == "play":
+            # Reset the game and continue playing
+            used_words = set()
+            score = 0
+            break
+        elif next_action == "menu":
+            # Go back to the menu
+            return
+        else:
+            print(Fore.YELLOW + "\nInvalid input! Please enter 'play' or 'menu'." + Style.RESET_ALL)
 
 
 while True:
