@@ -36,7 +36,7 @@ def print_menu():
     print("4. Exit\n")
 
 
-#https://rb.gy/w1qy2
+# Credits: https://rb.gy/w1qy2
 def load_words_from_google_sheets(sheet_name):
     worksheet = SHEET.worksheet(sheet_name)
     data = worksheet.get_all_records()
@@ -44,6 +44,7 @@ def load_words_from_google_sheets(sheet_name):
     return words_df
 
 
+# Choose the difficulty level for scramble and hangman games
 def choose_difficulty(difficulties):
     print("Categories:")
     for i, difficulty in enumerate(difficulties):
@@ -62,12 +63,14 @@ def choose_difficulty(difficulties):
         print(YELLOW + "Invalid difficulty choice! Please choose a number between 1 and {}.".format(len(difficulties)) + RESET_ALL)
 
 
+# Shuffle the words
 def scramble_word(word):
     scrambled = list(word)
     random.shuffle(scrambled)
     return ''.join(scrambled)
 
 
+# Scramble Game
 def play_scramble_game():
     words_df = load_words_from_google_sheets("scramble")
     difficulties = words_df["difficulty"].unique()
@@ -78,13 +81,16 @@ def play_scramble_game():
     selected_difficulty = choose_difficulty(difficulties)
 
     def play_game():
-        # Filter the words from google sheet based on the selected difficulty level
+        # Filter the words from google sheet
+        # based on the selected difficulty level
         difficulty_words = words_df[words_df["difficulty"] == selected_difficulty]
 
-        # Retrieve data from the 'words' column from the google sheet and store the words as a list
+        # Retrieve data from the 'words' column from the google sheet
+        # and store the words as a list
         words = difficulty_words["words"].tolist()
 
-        # Track the words that have already been used in the game, for unique gameplay experience.
+        # Track the words that have already been used in the game,
+        # for unique gameplay experience.
         used_words = set()
         score = 0
 
@@ -119,14 +125,14 @@ def play_scramble_game():
             if next_action == "play":
                 play_game()  # Restart the game
             elif next_action == "menu":
-                return main_fcn() # Go back to the menu
+                return main_fcn()  # Go back to the menu
             else:
                 print(YELLOW + "\nInvalid input! Please enter 'play' or 'menu'." + RESET_ALL)
 
     play_game()
 
 
-#Display the hangman word with guessed letters
+# Display the hangman word with guessed letters
 def display_word(word, guessed_letters):
     display = ""
     for char in word:
@@ -137,6 +143,7 @@ def display_word(word, guessed_letters):
     return display
 
 
+# Hangman game
 def play_hangman_game():
     words_df = load_words_from_google_sheets("hangman")
     difficulties = words_df["difficulty"].unique()
@@ -181,14 +188,21 @@ def play_hangman_game():
 
                 if guess in guessed_letters:
                     print(f"\n{YELLOW}You already guessed that letter!\n{RESET_ALL}")
+
+                # Check 'guess' to be a single alphabetic letter
                 elif guess.isalpha() and len(guess) == 1:
                     guessed_letters.add(guess)
+
                     if guess in word:
                         hidden_word = display_word(word, guessed_letters)
                         print(f"\n{GREEN}Correct guess! Word: {YELLOW}{hidden_word}\n{RESET_ALL}")
+                        
                         if "_" not in hidden_word:
                             score += 1
-                            print(f"{GREEN}You've guessed the word correctly! Your score is {score}{RESET_ALL}")
+                            print(
+                                f"{GREEN}You've guessed the word correctly! "
+                                f"Your score is {score}{RESET_ALL}"
+                            )
                             break
                     else:
                         attempts -= 1
@@ -217,7 +231,7 @@ def play_hangman_game():
 def generate_number():
     return random.randint(1, 10)
 
-
+# Guessing Game
 def play_guessing_game():
     while True:
         number = generate_number()
@@ -240,7 +254,10 @@ def play_guessing_game():
             if guess.isdigit():
                 guess = int(guess)
                 if guess == number:
-                    print(f"\n{GREEN}Congratulations! You guessed the correct number: {number}{RESET_ALL}")
+                    print(
+                        f"\n{GREEN}Congratulations! "
+                        f"You guessed the correct number: {number}{RESET_ALL}"
+                    )
                     break
                 elif guess < number:
                     print(f"{YELLOW}Too low!\n{RESET_ALL}")
