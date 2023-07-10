@@ -213,35 +213,40 @@ def generate_number():
 
 
 def play_guessing_game():
-    number = generate_number()
-    attempts = 3
-
-    print(f"{Fore.BLUE}\nWelcome to {Fore.RED}Guessing Game!{Style.RESET_ALL}")
-    print(f"{Fore.BLUE}Guess the number between 1 and 10 to win!{Style.RESET_ALL}")
-    print(f"{Fore.BLUE}Enter 'quit' to exit the game.\n{Style.RESET_ALL}")
     while True:
-        if attempts == 0:
-            print(f"{Fore.RED}Game Over! You ran out of attempts.{Style.RESET_ALL}")
-            print(f"The number was: {number}\n")
-            break
+        number = generate_number()
+        attempts = 3
 
-        guess = input("Enter your guess: ")
-
-        if guess == "quit":
-            break
-
-        if guess.isdigit():
-            guess = int(guess)
-            if guess == number:
-                print(f"\n{Fore.GREEN}Congratulations! You guessed the correct number: {number}{Style.RESET_ALL}")
+        print(f"{Fore.BLUE}\nWelcome to {Fore.RED}Guessing Game!{Style.RESET_ALL}")
+        print(f"{Fore.BLUE}Guess the number between 1 and 10 to win!{Style.RESET_ALL}")
+        print(f"{Fore.BLUE}Enter 'quit' to exit the game.\n{Style.RESET_ALL}")
+        while True:
+            if attempts == 0:
+                print(f"{Fore.RED}Game Over! You ran out of attempts.{Style.RESET_ALL}")
+                print(f"The number was: {number}\n")
                 break
-            elif guess < number:
-                print(f"{Fore.YELLOW}Too low!\n{Style.RESET_ALL}")
+
+            guess = input("Enter your guess: ")
+
+            if guess == "quit":
+                break
+
+            if guess.isdigit():
+                guess = int(guess)
+                if guess == number:
+                    print(f"\n{Fore.GREEN}Congratulations! You guessed the correct number: {number}{Style.RESET_ALL}")
+                    break
+                elif guess < number:
+                    print(f"{Fore.YELLOW}Too low!\n{Style.RESET_ALL}")
+                else:
+                    print(f"{Fore.YELLOW}Too high!\n{Style.RESET_ALL}")
+                attempts -= 1
             else:
-                print(f"{Fore.YELLOW}Too high!\n{Style.RESET_ALL}")
-            attempts -= 1
-        else:
-            print(f"\n{Fore.YELLOW}Invalid input! Please enter a number.\n{Style.RESET_ALL}")
+                print(f"\n{Fore.YELLOW}Invalid input! Please enter a number.\n{Style.RESET_ALL}")
+
+        play_again = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
+        if play_again == "menu":
+            break
 
     print(f"{Fore.GREEN}Thanks for playing!{Style.RESET_ALL}")
 
