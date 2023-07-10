@@ -21,7 +21,7 @@ SHEET = GSPREAD_CLIENT.open('word_triad')
 
 
 def print_menu():
-    print(Fore.BLUE + "Welcome to the " + Fore.RED + "WORD TRIAD GAME" + Fore.BLUE + " menu!\n" + Style.RESET_ALL)
+    print(Fore.BLUE + "\nWelcome to the " + Fore.RED + "WORD TRIAD GAME" + Fore.BLUE + " menu!\n" + Style.RESET_ALL)
     print(Fore.BLUE + "Please, choose a game by typing the corresponding number:" + Style.RESET_ALL)
     print("1. Scramble Game")
     print("2. Hangman Game")
@@ -43,7 +43,7 @@ def choose_difficulty(difficulties):
         print(f"{i+1}. {difficulty}")
 
     while True:
-        difficulty_choice = input("Choose a difficulty level (1-{}): ".format(len(difficulties)))
+        difficulty_choice = input("\nChoose a difficulty level (1-{}):".format(len(difficulties)))
 
         if difficulty_choice == "quit":
             return None
@@ -52,7 +52,7 @@ def choose_difficulty(difficulties):
         if difficulty_choice.isdigit() and int(difficulty_choice) in range(1, len(difficulties) + 1):
             return difficulties[int(difficulty_choice) - 1]
 
-        print("Invalid difficulty choice! Please choose a number between 1 and {}.".format(len(difficulties)))
+        print(Fore.YELLOW + "Invalid difficulty choice! Please choose a number between 1 and {}.".format(len(difficulties)) + Style.RESET_ALL)
 
 
 def scramble_word(word):
@@ -65,9 +65,9 @@ def play_scramble_game():
     words_df = load_words_from_google_sheets("scramble")
     difficulties = words_df["difficulty"].unique()
 
-    print(Fore.YELLOW + "Welcome to Scramble Game!" + Style.RESET_ALL)
-    print("Unscramble the word to earn points.")
-    print("Enter 'quit' to exit the game.")
+    print(Fore.BLUE + "\nWelcome to " + Fore.RED + "Scramble Game!" + Style.RESET_ALL)
+    print(Fore.BLUE + "Unscramble the word to earn points." + Style.RESET_ALL)
+    print(Fore.BLUE + "Enter 'quit' to exit the game.\n" + Style.RESET_ALL)
 
     selected_difficulty = choose_difficulty(difficulties)
 
@@ -83,7 +83,7 @@ def play_scramble_game():
 
     while True:
         if len(used_words) == len(words):
-            print(Fore.GREEN + "You have unscrambled all the words!" + Style.RESET_ALL)
+            print(Fore.GREEN + "\nYou have unscrambled all the words!\n" + Style.RESET_ALL)
             while True:
                 next_action = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
                 if next_action == "play":
@@ -95,7 +95,7 @@ def play_scramble_game():
                     # Go back to the menu
                     return
                 else:
-                    print("Invalid input! Please enter 'play' or 'menu'.")
+                    print(Fore.YELLOW + "\nInvalid input! Please enter 'play' or 'menu'." + Style.RESET_ALL)
     
         word = random.choice(words)
         while word in used_words:
@@ -104,7 +104,7 @@ def play_scramble_game():
         used_words.add(word)
         scrambled_word = scramble_word(word)
 
-        print("Scrambled word:", Fore.YELLOW + scrambled_word + Style.RESET_ALL)
+        print("\nScrambled word:", Fore.YELLOW + scrambled_word + Style.RESET_ALL)
         guess = input("Enter your guess: ").lower()
 
         if guess == "quit":
@@ -133,4 +133,4 @@ while True:
         print(Fore.BLUE + "Goodbye!" + Style.RESET_ALL)
         break
     else:
-        print("Invalid choice! Please enter a number between 1 and 4.")
+        print(Fore.YELLOW + "\nInvalid choice! Please enter a number between 1 and 4." + Style.RESET_ALL)
