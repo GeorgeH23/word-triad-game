@@ -189,6 +189,20 @@ def play_hangman_game():
                         print(f"\n{Fore.RED}Incorrect guess! Word: {Fore.YELLOW}{hidden_word}\n{Style.RESET_ALL}")
                 else:
                     print(f"\n{Fore.YELLOW}Invalid input! Please enter a single letter.\n{Style.RESET_ALL}")
+            
+            if attempts == 0:
+                print(f"{Fore.RED}You've run out of attempts. The word was {word}{Style.RESET_ALL}")
+
+        print(f"{Fore.GREEN}Thanks for playing! Your final score is {score}{Style.RESET_ALL}\n")
+
+        while True:
+            next_action = input(f"Enter 'play' to play again or 'menu' to go back to the menu: ")
+            if next_action == "play":
+                play_game()  # Restart the game
+            elif next_action == "menu":
+                return main_fcn()  # Go back to the menu
+            else:
+                print(f"{Fore.YELLOW}\nInvalid input! Please enter 'play' or 'menu'.{Style.RESET_ALL}")
 
     play_game()
 
