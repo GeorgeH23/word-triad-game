@@ -67,7 +67,7 @@ def play_scramble_game():
 
     print(Fore.BLUE + "\nWelcome to " + Fore.RED + "Scramble Game!" + Style.RESET_ALL)
     print(Fore.BLUE + "Unscramble the word to earn points." + Style.RESET_ALL)
-    print(Fore.BLUE + "Enter 'quit' to exit the game.\n" + Style.RESET_ALL)
+    #print(Fore.BLUE + "Enter 'quit' to exit the game.\n" + Style.RESET_ALL)
 
     selected_difficulty = choose_difficulty(difficulties)
 
@@ -113,25 +113,29 @@ def play_scramble_game():
             if next_action == "play":
                 play_game()  # Restart the game
             elif next_action == "menu":
-                return  # Go back to the menu
+                return main_fcn() # Go back to the menu
             else:
                 print(Fore.YELLOW + "\nInvalid input! Please enter 'play' or 'menu'." + Style.RESET_ALL)
 
     play_game()
 
 
-while True:
-    print_menu()
-    choice = input("Enter your choice (1-4): ")
+def main_fcn():
+    while True:
+        print_menu()
+        choice = input("Enter your choice (1-4): ")
 
-    if choice == "1":
-        play_scramble_game()
-    elif choice == "2":
-        play_hangman_game()
-    elif choice == "3":
-        play_guessing_game()
-    elif choice == "4":
-        print(Fore.BLUE + "Goodbye!" + Style.RESET_ALL)
-        break
-    else:
-        print(Fore.YELLOW + "\nInvalid choice! Please enter a number between 1 and 4." + Style.RESET_ALL)
+        if choice == "1":
+            play_scramble_game()
+        elif choice == "2":
+            play_hangman_game()
+        elif choice == "3":
+            play_guessing_game()
+        elif choice == "4":
+            print(Fore.BLUE + "Goodbye!" + Style.RESET_ALL)
+            break
+        else:
+            print(Fore.YELLOW + "\nInvalid choice! Please enter a number between 1 and 4." + Style.RESET_ALL)
+
+
+main_fcn()
