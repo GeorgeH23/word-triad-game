@@ -136,6 +136,11 @@ def play_hangman_game():
         used_words = set()
         score = 0
 
+        while True:
+            if len(used_words) == len(words):
+                print(Fore.GREEN + "\nYou have guessed all the words!" + Style.RESET_ALL)
+                break           
+
     play_game()
 
 
