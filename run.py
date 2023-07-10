@@ -207,6 +207,15 @@ def play_hangman_game():
     play_game()
 
 
+def play_guessing_game():
+    number = generate_number()
+    attempts = 3
+
+    print(Fore.BLUE + "\nWelcome to " + Fore.RED + "Guessing Game!" + Style.RESET_ALL)
+    print(Fore.BLUE + "Guess the number between 1 and 10 to win!\n" + Style.RESET_ALL)
+    print(Fore.BLUE + "Enter 'quit' to exit the game." + Style.RESET_ALL)
+    print(Fore.GREEN + "Thanks for playing!" + Style.RESET_ALL)
+
 def main_fcn():
     while True:
         print_menu()
