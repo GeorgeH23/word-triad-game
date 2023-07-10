@@ -43,12 +43,12 @@ def choose_difficulty(difficulties):
         print(f"{i+1}. {difficulty}")
 
     while True:
-        difficulty_choice = input("\nChoose a difficulty level (1-{}):".format(len(difficulties)))
+        difficulty_choice = input(f"\nChoose a difficulty level (1-{len(difficulties)}):")
 
         if difficulty_choice == "quit":
             return None
 
-        #check if the difficulty choise is a valid input
+        # Check if the difficulty choise is a valid input
         if difficulty_choice.isdigit() and int(difficulty_choice) in range(1, len(difficulties) + 1):
             return difficulties[int(difficulty_choice) - 1]
 
@@ -161,12 +161,12 @@ def play_hangman_game():
             guessed_letters = set()
             attempts = len(word)
 
-            print(f"\n{Fore.BLUE}Enter 'quit' to exit the game.{Style.RESET_ALL}")
+            print(f"{Fore.BLUE}Enter 'quit' to exit the game.{Style.RESET_ALL}")
             print(f"{Fore.BLUE}Total attempts: {len(word)}\n{Style.RESET_ALL}")
 
             while attempts > 0:
                 print(f"Attempts remaining: {Fore.RED}{attempts}{Style.RESET_ALL}")
-                print(f"Guessed letters: {Fore.YELLOW}{', '.join(guessed_letters)}{Style.RESET_ALL}")
+                print(f"Guessed letters: {Fore.RED}{', '.join(guessed_letters)}{Style.RESET_ALL}")
                 print(f"Word to guess: {Fore.YELLOW}{hidden_word}{Style.RESET_ALL}")
                 guess = input("Enter your guess: ").lower()
 
@@ -182,11 +182,11 @@ def play_hangman_game():
                         print(f"\n{Fore.GREEN}Correct guess! Word: {Fore.YELLOW}{hidden_word}\n{Style.RESET_ALL}")
                         if "_" not in hidden_word:
                             score += 1
-                            print(f"{Fore.GREEN}You've guessed the word correctly! Your score is {score}\n{Style.RESET_ALL}")
+                            print(f"{Fore.GREEN}You've guessed the word correctly! Your score is {score}{Style.RESET_ALL}")
                             break
                     else:
                         attempts -= 1
-                        print(f"{Fore.RED}Incorrect guess! Word: {Fore.YELLOW}{hidden_word}{Style.RESET_ALL}")
+                        print(f"\n{Fore.RED}Incorrect guess! Word: {Fore.YELLOW}{hidden_word}\n{Style.RESET_ALL}")
                 else:
                     print(f"\n{Fore.YELLOW}Invalid input! Please enter a single letter.\n{Style.RESET_ALL}")
 
