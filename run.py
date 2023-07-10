@@ -71,54 +71,53 @@ def play_scramble_game():
 
     selected_difficulty = choose_difficulty(difficulties)
 
-    #Filter the words from google sheet based on the selected difficulty level
-    difficulty_words = words_df[words_df["difficulty"] == selected_difficulty]
+    def play_game():
+        # Filter the words from google sheet based on the selected difficulty level
+        difficulty_words = words_df[words_df["difficulty"] == selected_difficulty]
 
-    #Retrive data from the 'words' column from the google sheet and stores the words as a list
-    words = difficulty_words["words"].tolist()
+        # Retrieve data from the 'words' column from the google sheet and store the words as a list
+        words = difficulty_words["words"].tolist()
 
-    #Track the words that have already been used in the game, for unique gameplay experience.
-    used_words = set()
-    score = 0
+        # Track the words that have already been used in the game, for unique gameplay experience.
+        used_words = set()
+        score = 0
 
-    while True:
-        if len(used_words) == len(words):
-            print(Fore.GREEN + "\nYou have unscrambled all the words!" + Style.RESET_ALL)
-            break
+        while True:
+            if len(used_words) == len(words):
+                print(Fore.GREEN + "\nYou have unscrambled all the words!" + Style.RESET_ALL)
+                break
 
-        word = random.choice(words)
-        while word in used_words:
             word = random.choice(words)
+            while word in used_words:
+                word = random.choice(words)
 
-        used_words.add(word)
-        scrambled_word = scramble_word(word)
+            used_words.add(word)
+            scrambled_word = scramble_word(word)
 
-        print("\nScrambled word:", Fore.YELLOW + scrambled_word + Style.RESET_ALL)
-        guess = input("Enter your guess: ").lower()
+            print("\nScrambled word:", Fore.YELLOW + scrambled_word + Style.RESET_ALL)
+            guess = input("Enter your guess: ").lower()
 
-        if guess == "quit":
-            break
+            if guess == "quit":
+                return
 
-        if guess == word:
-            score += 1
-            print(Fore.GREEN + "Correct! Your score is", score, Style.RESET_ALL)
-        else:
-            print(Fore.RED + "Incorrect! The correct word is", word, Style.RESET_ALL)
+            if guess == word:
+                score += 1
+                print(Fore.GREEN + "Correct! Your score is", score, Style.RESET_ALL)
+            else:
+                print(Fore.RED + "Incorrect! The correct word is", word, Style.RESET_ALL)
 
-    print(f"{Fore.GREEN}Thanks for playing! Your final score is {score}{Style.RESET_ALL}\n")
+        print(f"{Fore.GREEN}Thanks for playing! Your final score is {score}{Style.RESET_ALL}\n")
 
-    while True:
-        next_action = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
-        if next_action == "play":
-            # Reset the game and continue playing
-            used_words = set()
-            score = 0
-            break
-        elif next_action == "menu":
-            # Go back to the menu
-            return
-        else:
-            print(Fore.YELLOW + "\nInvalid input! Please enter 'play' or 'menu'." + Style.RESET_ALL)
+        while True:
+            next_action = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
+            if next_action == "play":
+                play_game()  # Restart the game
+            elif next_action == "menu":
+                return  # Go back to the menu
+            else:
+                print(Fore.YELLOW + "\nInvalid input! Please enter 'play' or 'menu'." + Style.RESET_ALL)
+
+    play_game()
 
 
 while True:
