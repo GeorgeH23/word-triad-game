@@ -120,6 +120,17 @@ def play_scramble_game():
     play_game()
 
 
+#Display the hangman word with guessed letters
+def display_word(word, guessed_letters):
+    display = ""
+    for char in word:
+        if char in guessed_letters:
+            display += char + " "
+        else:
+            display += "_ "
+    return display
+
+
 def play_hangman_game():
     words_df = load_words_from_google_sheets("hangman")
     difficulties = words_df["difficulty"].unique()
