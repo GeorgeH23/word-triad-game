@@ -245,35 +245,49 @@ def play_guessing_game():
         print(f"{BLUE}Guess the number between 1 and 10 to win!{RESET_ALL}")
         print(f"{BLUE}Enter 'quit' to exit the game.\n{RESET_ALL}")
         while True:
-            if attempts == 0:
-                print(f"{RED}Game Over! You ran out of attempts.{RESET_ALL}")
-                print(f"The number was: {number}\n")
-                break
-
-            guess = input("Enter your guess: ")
-
-            if guess == "quit":
-                break
-
-            if guess.isdigit():
-                guess = int(guess)
-                if guess == number:
-                    print(
-                        f"\n{GREEN}Congratulations! "
-                        f"You guessed the correct number: {number}{RESET_ALL}"
-                    )
+            try:
+                if attempts == 0:
+                    print(f"{RED}Game Over! You ran out of attempts.{RESET_ALL}")
+                    print(f"The number was: {number}\n")
                     break
-                elif guess < number:
-                    print(f"{YELLOW}Too low!\n{RESET_ALL}")
-                else:
-                    print(f"{YELLOW}Too high!\n{RESET_ALL}")
-                attempts -= 1
-            else:
-                print(f"\n{YELLOW}Invalid input! Please enter a number.\n{RESET_ALL}")
 
-        play_again = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
-        if play_again == "menu":
-            break
+                guess = input("Enter your guess: ")
+
+                if guess == "quit":
+                    break
+
+                if guess.isdigit():
+                    guess = int(guess)
+                    if guess == number:
+                        print(
+                            f"\n{GREEN}Congratulations! "
+                            f"You guessed the correct number: {number}{RESET_ALL}"
+                        )
+                        break
+                    elif guess < number:
+                        print(f"{YELLOW}Too low!\n{RESET_ALL}")
+                    else:
+                        print(f"{YELLOW}Too high!\n{RESET_ALL}")
+                    attempts -= 1
+                else:
+                    raise ValueError("Invalid input! Please enter a number.")
+
+            except ValueError as e:
+                print(f"\n{YELLOW}{str(e)}{RESET_ALL}")
+                continue
+
+        while True:
+            try:
+                play_again = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
+                if play_again == "play":
+                    break
+                elif play_again == "menu":
+                    return
+                else:
+                    raise ValueError("Invalid input! Please enter 'play' or 'menu'.")
+
+            except ValueError as e:
+                print(f"\n{YELLOW}{str(e)}{RESET_ALL}")
 
     print(f"{GREEN}Thanks for playing!{RESET_ALL}")
 
