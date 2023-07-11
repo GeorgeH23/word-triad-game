@@ -124,13 +124,17 @@ def play_scramble_game():
         print(f"{GREEN}Thanks for playing! Your final score is {score}{RESET_ALL}\n")
 
         while True:
-            next_action = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
-            if next_action == "play":
-                play_game()  # Restart the game
-            elif next_action == "menu":
-                return main_fcn()  # Go back to the menu
-            else:
-                print(f"{YELLOW}\nInvalid input! Please enter 'play' or 'menu'.{RESET_ALL}")
+            try:
+                next_action = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
+                if next_action == "play":
+                    play_game()  # Restart the game
+                elif next_action == "menu":
+                    return main_fcn()  # Go back to the menu
+                else:
+                    raise ValueError("Invalid input! Please enter 'play' or 'menu'.")
+
+            except ValueError as e:
+                print(f"\n{YELLOW}{str(e)}{RESET_ALL}")
 
     play_game()
 
@@ -224,7 +228,7 @@ def play_hangman_game():
         print(f"{GREEN}Thanks for playing! Your final score is {score}{RESET_ALL}\n")
 
         while True:
-            try: 
+            try:
                 next_action = input(f"Enter 'play' to play again or 'menu' to go back to the menu: ")
                 if next_action == "play":
                     play_game()  # Restart the game
