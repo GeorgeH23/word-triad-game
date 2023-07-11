@@ -135,7 +135,7 @@ class WordTriadGame:
                     if next_action == "play":
                         play_game()  # Restart the game
                     elif next_action == "menu":
-                        return self.main_fcn()  # Go back to the menu
+                        return  # Go back to the menu
                     else:
                         raise ValueError("Invalid input! Please enter 'play' or 'menu'.")
 
@@ -238,7 +238,7 @@ class WordTriadGame:
                     if next_action == "play":
                         play_game()  # Restart the game
                     elif next_action == "menu":
-                        return self.main_fcn()  # Go back to the menu
+                        return  # Go back to the menu
                     else:
                         raise ValueError("Invalid input! Please enter 'play' or 'menu'.")
 
@@ -253,7 +253,9 @@ class WordTriadGame:
 
     # Guessing Game
     def play_guessing_game(self):
-        while True:
+        restart_game = True
+
+        while restart_game:
             number = self.generate_number()
             attempts = 3
 
@@ -270,7 +272,8 @@ class WordTriadGame:
                     guess = input("Enter your guess: ")
 
                     if guess == "quit":
-                        break
+                        print(f"{self.GREEN}Thanks for playing!\n{self.RESET_ALL}")
+                        return
 
                     if guess.isdigit():
                         guess = int(guess)
@@ -292,20 +295,22 @@ class WordTriadGame:
                     print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
                     continue
 
-            while True:
-                try:
-                    play_again = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
-                    if play_again == "play":
-                        break
-                    elif play_again == "menu":
-                        return
-                    else:
-                        raise ValueError("Invalid input! Please enter 'play' or 'menu'.")
+            print(f"{self.GREEN}Thanks for playing!{self.RESET_ALL}")
 
-                except ValueError as e:
-                    print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
+            if restart_game:
+                while True:
+                    try:
+                        next_action = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
+                        if next_action == "play":
+                            break
+                        elif next_action == "menu":
+                            return
+                        else:
+                            raise ValueError("Invalid input! Please enter 'play' or 'menu'.")
 
-        print(f"{self.GREEN}Thanks for playing!{self.RESET_ALL}")
+                    except ValueError as e:
+                        print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
+
 
     def main_fcn(self):
         while True:
@@ -326,6 +331,7 @@ class WordTriadGame:
 
     def run(self):
         self.main_fcn()
+
 
 game = WordTriadGame()
 game.run()
