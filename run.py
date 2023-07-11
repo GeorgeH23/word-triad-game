@@ -1,7 +1,3 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
-
 import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
@@ -11,6 +7,7 @@ import random
 
 class WordTriadGame:
     def __init__(self):
+        # Define the Google Sheets API scope
         self.SCOPE = [
             "https://www.googleapis.com/auth/spreadsheets",
             "https://www.googleapis.com/auth/drive.file",
@@ -20,9 +17,11 @@ class WordTriadGame:
         self.SCOPED_CREDS = self.CREDS.with_scopes(self.SCOPE)
         self.GSPREAD_CLIENT = gspread.authorize(self.SCOPED_CREDS)
         self.SHEET = self.GSPREAD_CLIENT.open('word_triad')
+
+        # Track if a game has been played
         self.game_played = False
 
-        # Color constants
+        # Color constants for formatting text
         self.BLUE = Fore.BLUE
         self.RED = Fore.RED
         self.YELLOW = Fore.YELLOW
@@ -66,7 +65,10 @@ class WordTriadGame:
                 break
 
             # Check if the difficulty choise is a valid input
-            if difficulty_choice.isdigit() and int(difficulty_choice) in range(1, len(difficulties) + 1):
+            if (
+                difficulty_choice.isdigit() and
+                int(difficulty_choice) in range(1, len(difficulties) + 1)
+            ):
                 return difficulties[int(difficulty_choice) - 1]
 
             print(
@@ -92,20 +94,18 @@ class WordTriadGame:
         selected_difficulty = self.choose_difficulty(difficulties)
 
         def play_game():
-            # Filter the words from google sheet
-            # based on the selected difficulty level
+            # Filter the words from google sheet based on difficulty
             difficulty_words = words_df[words_df["difficulty"] == selected_difficulty]
 
             # Retrieve data from the 'words' column from the google sheet
-            # and store the words as a list
             words = difficulty_words["words"].tolist()
 
-            # Track the words that have already been used in the game,
-            # for unique gameplay experience.
+            # Track the words that have already been used in the game
             used_words = set()
             score = 0
 
             while True:
+                # Check if all words have been unscrabled.
                 if len(used_words) == len(words):
                     print(f"{self.GREEN}\nYou have unscrambled all the words!{self.RESET_ALL}")
                     break
@@ -117,20 +117,24 @@ class WordTriadGame:
                 used_words.add(word)
                 scrambled_word = self.scramble_word(word)
 
+                # Display the scrambled word and prompt for a guess.
                 print(f"\nScrambled word: {self.YELLOW}{scrambled_word}{self.RESET_ALL}")
                 guess = input("Enter your guess: ").lower()
 
                 if guess == "quit":
                     return
 
+                # Check if the guess is correct and update the score.
                 if guess == word:
                     score += 1
                     print(f"{self.GREEN}Correct! Your score is {score}{self.RESET_ALL}")
                 else:
                     print(f"{self.RED}Incorrect! The correct word is {word}{self.RESET_ALL}")
 
+            # Display the final score.
             print(f"{self.GREEN}Thanks for playing! Your final score is {score}{self.RESET_ALL}\n")
 
+            # After completing a game round, prompt for the next action.
             while True:
                 try:
                     next_action = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
@@ -147,7 +151,7 @@ class WordTriadGame:
 
         play_game()
 
-    # Display the hangman word with guessed letters
+    # Display the hangman word with guessed letters filled in.
     def display_word(self, word, guessed_letters):
         display = ""
         for char in word:
@@ -210,10 +214,16 @@ class WordTriadGame:
                             guessed_letters.add(guess)
 
                             if guess in word:
+                                # Update the hidden_word with the correctly guessed letter.
                                 hidden_word = self.display_word(word, guessed_letters)
-                                print(f"\n{self.GREEN}Correct guess! Word: {self.YELLOW}{hidden_word}\n{self.RESET_ALL}")
+                                print(
+                                    f"\n{self.GREEN}Correct guess! Word: "
+                                    f"{self.YELLOW}{hidden_word}\n"
+                                    f"{self.RESET_ALL}"
+                                )
 
                                 if "_" not in hidden_word:
+                                    # All letters have been guessed correctly.
                                     score += 1
                                     print(
                                         f"{self.GREEN}You've guessed the word correctly! "
@@ -222,8 +232,13 @@ class WordTriadGame:
                                     )
                                     break
                             else:
+                                # Incorrect guess.
                                 attempts -= 1
-                                print(f"\n{self.RED}Incorrect guess! Word: {self.YELLOW}{hidden_word}\n{self.RESET_ALL}")
+                                print(
+                                    f"\n{self.RED}Incorrect guess! Word: "
+                                    f"{self.YELLOW}{hidden_word}\n"
+                                    f"{self.RESET_ALL}"
+                                )
                         else:
                             raise ValueError("Invalid input! Please enter a single letter.")
 
@@ -233,8 +248,10 @@ class WordTriadGame:
                 if attempts == 0:
                     print(f"{self.RED}You've run out of attempts. The word was {word}{self.RESET_ALL}")
 
+            # Display the final score.
             print(f"{self.GREEN}Thanks for playing! Your final score is {score}{self.RESET_ALL}\n")
 
+            # After completing a game round, prompt for the next action.
             while True:
                 try:
                     next_action = input(f"Enter 'play' to play again or 'menu' to go back to the menu: ")
@@ -268,6 +285,7 @@ class WordTriadGame:
             print(f"{self.BLUE}Enter 'quit' to exit the game.\n{self.RESET_ALL}")
             while True:
                 try:
+                    # Check if the player has run out of attempts.
                     if attempts == 0:
                         print(f"{self.RED}Game Over! You ran out of attempts.{self.RESET_ALL}")
                         print(f"The number was: {number}\n")
@@ -279,12 +297,14 @@ class WordTriadGame:
                         print(f"{self.GREEN}Thanks for playing!\n{self.RESET_ALL}")
                         return
 
+                    # Check if the 'guess' is a valid number.
                     if guess.isdigit():
                         guess = int(guess)
                         if guess == number:
                             print(
                                 f"\n{self.GREEN}Congratulations! "
-                                f"You guessed the correct number: {number}{self.RESET_ALL}"
+                                f"You guessed the correct number: "
+                                f"{number}{self.RESET_ALL}"
                             )
                             break
                         elif guess < number:
@@ -296,19 +316,21 @@ class WordTriadGame:
                         raise ValueError("Invalid input! Please enter a number.")
 
                 except ValueError as e:
+                    # Handle the ValueError and display an error message.
                     print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
                     continue
 
             print(f"{self.GREEN}Thanks for playing!{self.RESET_ALL}")
 
             if restart_game:
+                # After completing a game round, prompt for the next action.
                 while True:
                     try:
                         next_action = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
                         if next_action == "play":
-                            break
+                            break  # Exit the loop and restart the game.
                         elif next_action == "menu":
-                            return
+                            return  # Exit the function and go back to the menu.
                         else:
                             raise ValueError("Invalid input! Please enter 'play' or 'menu'.")
 
@@ -332,12 +354,19 @@ class WordTriadGame:
                 self.game_played = True
             elif choice == "4":
                 if self.game_played:
+                    # If any game has been played, display a thanks message.
                     print(f"\n{self.GREEN}Thanks for playing!{self.RESET_ALL}")
                 print(f"{self.BLUE}Goodbye!{self.RESET_ALL}")
-                break
+                break  # Exit the loop and end the program
             else:
-                print(f"{self.YELLOW}\nInvalid choice! Please enter a number between 1 and 4.{self.RESET_ALL}")
+                # If the user enters an invalid choice, display an error message
+                print(
+                    f"{self.YELLOW}\nInvalid choice! "
+                    f"Please enter a number between 1 and 4."
+                    f"{self.RESET_ALL}"
+                )
 
+    # Start the program by calling the main function
     def run(self):
         self.main_fcn()
 
