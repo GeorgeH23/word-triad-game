@@ -20,6 +20,7 @@ class WordTriadGame:
         self.SCOPED_CREDS = self.CREDS.with_scopes(self.SCOPE)
         self.GSPREAD_CLIENT = gspread.authorize(self.SCOPED_CREDS)
         self.SHEET = self.GSPREAD_CLIENT.open('word_triad')
+        self.game_played = False
 
         # Color constants
         self.BLUE = Fore.BLUE
@@ -60,8 +61,9 @@ class WordTriadGame:
         while True:
             difficulty_choice = input(f"\nChoose a difficulty level (1-{len(difficulties)}):")
 
-            if difficulty_choice == "quit":
-                return None
+            if difficulty_choice.lower() == "quit":
+                self.main_fcn()
+                break
 
             # Check if the difficulty choise is a valid input
             if difficulty_choice.isdigit() and int(difficulty_choice) in range(1, len(difficulties) + 1):
@@ -141,6 +143,7 @@ class WordTriadGame:
 
                 except ValueError as e:
                     print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
+                    break  # Exit the loop after display the error message.
 
         play_game()
 
@@ -244,6 +247,7 @@ class WordTriadGame:
 
                 except ValueError as e:
                     print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
+                    break  # Exit the loop after display the error message.
 
         play_game()
 
@@ -310,7 +314,7 @@ class WordTriadGame:
 
                     except ValueError as e:
                         print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
-
+                        break  # Exit the loop after display the error message.
 
     def main_fcn(self):
         while True:
@@ -319,11 +323,16 @@ class WordTriadGame:
 
             if choice == "1":
                 self.play_scramble_game()
+                self.game_played = True
             elif choice == "2":
                 self.play_hangman_game()
+                self.game_played = True
             elif choice == "3":
                 self.play_guessing_game()
+                self.game_played = True
             elif choice == "4":
+                if self.game_played:
+                    print(f"\n{self.GREEN}Thanks for playing!{self.RESET_ALL}")
                 print(f"{self.BLUE}Goodbye!{self.RESET_ALL}")
                 break
             else:
