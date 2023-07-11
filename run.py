@@ -184,34 +184,39 @@ def play_hangman_game():
                 print(f"Attempts remaining: {RED}{attempts}{RESET_ALL}")
                 print(f"Guessed letters: {RED}{', '.join(guessed_letters)}{RESET_ALL}")
                 print(f"Word to guess: {YELLOW}{hidden_word}{RESET_ALL}")
-                guess = input("Enter your guess: ").lower()
 
-                if guess == "quit":
-                    return
+                try:
+                    guess = input("Enter your guess: ").lower()
 
-                if guess in guessed_letters:
-                    print(f"\n{YELLOW}You already guessed that letter!\n{RESET_ALL}")
+                    if guess == "quit":
+                        return
 
-                # Check 'guess' to be a single alphabetic letter
-                elif guess.isalpha() and len(guess) == 1:
-                    guessed_letters.add(guess)
+                    if guess in guessed_letters:
+                        print(f"\n{YELLOW}You already guessed that letter!\n{RESET_ALL}")
 
-                    if guess in word:
-                        hidden_word = display_word(word, guessed_letters)
-                        print(f"\n{GREEN}Correct guess! Word: {YELLOW}{hidden_word}\n{RESET_ALL}")
+                    # Check 'guess' to be a single alphabetic letter
+                    elif guess.isalpha() and len(guess) == 1:
+                        guessed_letters.add(guess)
 
-                        if "_" not in hidden_word:
-                            score += 1
-                            print(
-                                f"{GREEN}You've guessed the word correctly! "
-                                f"Your score is {score}{RESET_ALL}"
-                            )
-                            break
+                        if guess in word:
+                            hidden_word = display_word(word, guessed_letters)
+                            print(f"\n{GREEN}Correct guess! Word: {YELLOW}{hidden_word}\n{RESET_ALL}")
+
+                            if "_" not in hidden_word:
+                                score += 1
+                                print(
+                                    f"{GREEN}You've guessed the word correctly! "
+                                    f"Your score is {score}{RESET_ALL}"
+                                )
+                                break
+                        else:
+                            attempts -= 1
+                            print(f"\n{RED}Incorrect guess! Word: {YELLOW}{hidden_word}\n{RESET_ALL}")
                     else:
-                        attempts -= 1
-                        print(f"\n{RED}Incorrect guess! Word: {YELLOW}{hidden_word}\n{RESET_ALL}")
-                else:
-                    print(f"\n{YELLOW}Invalid input! Please enter a single letter.\n{RESET_ALL}")
+                        raise ValueError("Invalid input! Please enter a single letter.")
+
+                except ValueError as e:
+                    print(f"\n{YELLOW}{str(e)}\n{RESET_ALL}")
 
             if attempts == 0:
                 print(f"{RED}You've run out of attempts. The word was {word}{RESET_ALL}")
@@ -219,13 +224,17 @@ def play_hangman_game():
         print(f"{GREEN}Thanks for playing! Your final score is {score}{RESET_ALL}\n")
 
         while True:
-            next_action = input(f"Enter 'play' to play again or 'menu' to go back to the menu: ")
-            if next_action == "play":
-                play_game()  # Restart the game
-            elif next_action == "menu":
-                return main_fcn()  # Go back to the menu
-            else:
-                print(f"{YELLOW}\nInvalid input! Please enter 'play' or 'menu'.{RESET_ALL}")
+            try: 
+                next_action = input(f"Enter 'play' to play again or 'menu' to go back to the menu: ")
+                if next_action == "play":
+                    play_game()  # Restart the game
+                elif next_action == "menu":
+                    return main_fcn()  # Go back to the menu
+                else:
+                    raise ValueError("Invalid input! Please enter 'play' or 'menu'.")
+
+            except ValueError as e:
+                print(f"\n{YELLOW}{str(e)}{RESET_ALL}")
 
     play_game()
 
