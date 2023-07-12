@@ -15,7 +15,9 @@
 
 ## Introduction
 
-"Welcome to the Word Triad Game! Test your word-solving skills and enjoy a collection of engaging word games. Unscramble words, play hangman, and guess numbers to earn points and have fun. Improve your vocabulary while enjoying the challenge. Let's jump into the world of words and start playing the Word Triad Game!"
+Welcome to the Word Triad Game! 
+Test your word-solving skills and enjoy a collection of engaging word games. Unscramble words, play hangman, and guess numbers to earn points and have fun. Improve your vocabulary while enjoying the challenge. 
+Let's jump into the world of words and start playing the Word Triad Game!
 
 ![Word Triad Game Mockup Images](documentation/word-triad-mockup.png)
 
