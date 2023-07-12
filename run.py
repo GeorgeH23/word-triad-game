@@ -161,6 +161,7 @@ class WordTriadGame:
                     next_action = input("Enter 'play' to play again or 'menu' to go back to the menu: ")
                     if next_action == "play":
                         play_game()  # Restart the game
+                        break
                     elif next_action == "menu":
                         return  # Go back to the menu
                     else:
@@ -168,7 +169,6 @@ class WordTriadGame:
 
                 except ValueError as e:
                     print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
-                    break  # Exit the loop after display the error message.
 
         play_game()
 
@@ -313,6 +313,7 @@ class WordTriadGame:
                     next_action = input(f"Enter 'play' to play again or 'menu' to go back to the menu: ")
                     if next_action == "play":
                         play_game()  # Restart the game
+                        break
                     elif next_action == "menu":
                         return  # Go back to the menu
                     else:
@@ -320,7 +321,6 @@ class WordTriadGame:
 
                 except ValueError as e:
                     print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
-                    break  # Exit the loop after display the error message.
 
         play_game()
 
