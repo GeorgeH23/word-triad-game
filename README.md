@@ -32,29 +32,48 @@
 ### Existing Features
 
 -   __Menu__
-    - 
+    - The WordTriadGame starts with a menu where the user can choose from different game options. 
       ![Menu](documentation/menu.png)
 
 -   __Scramble Game__
-    - 
-    - 
+    - The first option is ScrambleGame.
+    - The user has to choose the difficulty level of the game.
+    - Invalid message will appear if the option is not written correctly.
+    - If typing 'quit' will go back to the main menu.
+    - The user has to unscramble the word displayed to achive points.
+    - The word is randomly choosed from the Google Sheets document based on difficulty level.
+    - A message will let the user know if he unscramble the word correctly or not.
+    - At the end of the game the user see a 'thank you' message and the score.
+    - The user has the option to 'play again' or to 'go back' to the main menu.
+    - Invalid message will appear if the option is not written correctly.
       ![Scramble](documentation/scramble.png)
 
 -   __Hangman Game__
-    - 
-    - 
+    - The second option is HangmanGame.
+    - The user has to choose the difficulty level of the game.
+    - Invalid message will appear if the option is not written correctly.
+    - If typing 'quit' will go back to the main menu.
+    - Will be displayed to the user: the attempts remaining, a list with the gussed letters, the word to guess will be hiden by '_' and an input.
+    - A message will let the user know if he guessed the letter typed correctly or not.
+    - Invalid message will appear if the user is typing a number or multiple letters.
+    - At the end of the game the user see a 'thank you' message and the score.
+    - The user has the option to 'play again' or to 'go back' to the main menu.
+    - Invalid message will appear if the option is not written correctly.
       ![Hangman](documentation/hangman.png)
 
 -   __Guessing Game__
-    - 
-    - 
-    - 
-    - 
+    - The third option is GuessingGame.
+    - A welcome message is displayed.
+    - The user need to guess a randomly generated number between 1 and 10.
+    - A message will let the user know if the typed number is to low, to high or correct.
+    - Invalid message will be displayed if you choose another charachter then a number.
+    - At the end of the game the user see a 'thank you' message.
+    - The user has the option to 'play again' or to 'go back' to the main menu.
       ![Guessing](documentation/guessing.png)
 
 -   __Exit__
-    - 
-    - 
+    - The user can choose to exit the game at any time
+    - A specific message will be displayed.
       ![Exit](documentation/exit.png)
 
 ## Data Model
