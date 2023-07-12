@@ -88,8 +88,14 @@ class WordTriadGame:
         words_df = self.load_words_from_google_sheets("scramble")
         difficulties = words_df["difficulty"].unique()
 
-        print(f"{self.BLUE}\nWelcome to {self.RED}Scramble Game!{self.RESET_ALL}")
-        print(f"{self.BLUE}Unscramble the word to earn points.\n{self.RESET_ALL}")
+        print(
+            f"{self.BLUE}\nWelcome to {self.RED}Scramble Game!"
+            f"{self.RESET_ALL}"
+        )
+        print(
+            f"{self.BLUE}Unscramble the word to earn points.\n"
+            f"{self.RESET_ALL}"
+        )
 
         selected_difficulty = self.choose_difficulty(difficulties)
 
@@ -107,7 +113,10 @@ class WordTriadGame:
             while True:
                 # Check if all words have been unscrabled.
                 if len(used_words) == len(words):
-                    print(f"{self.GREEN}\nYou have unscrambled all the words!{self.RESET_ALL}")
+                    print(
+                        f"{self.GREEN}\nYou have unscrambled all the words!"
+                        f"{self.RESET_ALL}"
+                    )
                     break
 
                 word = random.choice(words)
@@ -118,7 +127,10 @@ class WordTriadGame:
                 scrambled_word = self.scramble_word(word)
 
                 # Display the scrambled word and prompt for a guess.
-                print(f"\nScrambled word: {self.YELLOW}{scrambled_word}{self.RESET_ALL}")
+                print(
+                    f"\nScrambled word: {self.YELLOW}{scrambled_word}"
+                    f"{self.RESET_ALL}"
+                )
                 guess = input("Enter your guess: ").lower()
 
                 if guess == "quit":
@@ -127,12 +139,21 @@ class WordTriadGame:
                 # Check if the guess is correct and update the score.
                 if guess == word:
                     score += 1
-                    print(f"{self.GREEN}Correct! Your score is {score}{self.RESET_ALL}")
+                    print(
+                        f"{self.GREEN}Correct! Your score is {score}"
+                        f"{self.RESET_ALL}"
+                    )
                 else:
-                    print(f"{self.RED}Incorrect! The correct word is {word}{self.RESET_ALL}")
+                    print(
+                        f"{self.RED}Incorrect! The correct word is {word}"
+                        f"{self.RESET_ALL}"
+                    )
 
             # Display the final score.
-            print(f"{self.GREEN}Thanks for playing! Your final score is {score}{self.RESET_ALL}\n")
+            print(
+                f"{self.GREEN}Thanks for playing! Your final score is {score}"
+                f"{self.RESET_ALL}\n"
+            )
 
             # After completing a game round, prompt for the next action.
             while True:
@@ -166,7 +187,10 @@ class WordTriadGame:
         words_df = self.load_words_from_google_sheets("hangman")
         difficulties = words_df["difficulty"].unique()
 
-        print(f"{self.BLUE}\nWelcome to {self.RED}Hangman Game!{self.RESET_ALL}")
+        print(
+            f"{self.BLUE}\nWelcome to {self.RED}Hangman Game!"
+            f"{self.RESET_ALL}"
+        )
         print(f"{self.BLUE}Guess the word to win!{self.RESET_ALL}")
 
         selected_difficulty = self.choose_difficulty(difficulties)
@@ -180,7 +204,10 @@ class WordTriadGame:
 
             while True:
                 if len(used_words) == len(words):
-                    print(f"{self.GREEN}\nYou have guessed all the words!{self.RESET_ALL}")
+                    print(
+                        f"{self.GREEN}\nYou have guessed all the words!"
+                        f"{self.RESET_ALL}"
+                    )
                     break
 
                 word = random.choice(words)
@@ -192,13 +219,29 @@ class WordTriadGame:
                 guessed_letters = set()
                 attempts = len(word)
 
-                print(f"{self.BLUE}Enter 'quit' to exit the game.{self.RESET_ALL}")
-                print(f"{self.BLUE}Total attempts: {len(word)}\n{self.RESET_ALL}")
+                print(
+                    f"{self.BLUE}Enter 'quit' to exit the game."
+                    f"{self.RESET_ALL}"
+                )
+                print(
+                    f"{self.BLUE}Total attempts: {len(word)}\n"
+                    f"{self.RESET_ALL}"
+                )
 
                 while attempts > 0:
-                    print(f"Attempts remaining: {self.RED}{attempts}{self.RESET_ALL}")
-                    print(f"Guessed letters: {self.RED}{', '.join(guessed_letters)}{self.RESET_ALL}")
-                    print(f"Word to guess: {self.YELLOW}{hidden_word}{self.RESET_ALL}")
+                    print(
+                        f"Attempts remaining: {self.RED}{attempts}"
+                        f"{self.RESET_ALL}"
+                    )
+                    print(
+                        f"Guessed letters: "
+                        f"{self.RED}{', '.join(guessed_letters)}"
+                        f"{self.RESET_ALL}"
+                    )
+                    print(
+                        f"Word to guess: {self.YELLOW}{hidden_word}"
+                        f"{self.RESET_ALL}"
+                    )
 
                     try:
                         guess = input("Enter your guess: ").lower()
@@ -207,7 +250,11 @@ class WordTriadGame:
                             return
 
                         if guess in guessed_letters:
-                            print(f"\n{self.YELLOW}You already guessed that letter!\n{self.RESET_ALL}")
+                            print(
+                                f"\n{self.YELLOW}"
+                                f"You already guessed that letter!\n"
+                                f"{self.RESET_ALL}"
+                            )
 
                         # Check 'guess' to be a single alphabetic letter
                         elif guess.isalpha() and len(guess) == 1:
@@ -226,7 +273,8 @@ class WordTriadGame:
                                     # All letters have been guessed correctly.
                                     score += 1
                                     print(
-                                        f"{self.GREEN}You've guessed the word correctly! "
+                                        f"{self.GREEN}"
+                                        f"You've guessed the word correctly! "
                                         f"Your score is {score}"
                                         f"{self.RESET_ALL}"
                                     )
@@ -246,10 +294,18 @@ class WordTriadGame:
                         print(f"\n{self.YELLOW}{str(e)}\n{self.RESET_ALL}")
 
                 if attempts == 0:
-                    print(f"{self.RED}You've run out of attempts. The word was {word}{self.RESET_ALL}")
+                    print(
+                        f"{self.RED}"
+                        f"You've run out of attempts. The word was {word}"
+                        f"{self.RESET_ALL}"
+                    )
 
             # Display the final score.
-            print(f"{self.GREEN}Thanks for playing! Your final score is {score}{self.RESET_ALL}\n")
+            print(
+                f"{self.GREEN}"
+                f"Thanks for playing! Your final score is {score}"
+                f"{self.RESET_ALL}\n"
+            )
 
             # After completing a game round, prompt for the next action.
             while True:
@@ -280,21 +336,36 @@ class WordTriadGame:
             number = self.generate_number()
             attempts = 3
 
-            print(f"{self.BLUE}\nWelcome to {self.RED}Guessing Game!{self.RESET_ALL}")
-            print(f"{self.BLUE}Guess the number between 1 and 10 to win!{self.RESET_ALL}")
-            print(f"{self.BLUE}Enter 'quit' to exit the game.\n{self.RESET_ALL}")
+            print(
+                f"{self.BLUE}\nWelcome to {self.RED}Guessing Game!"
+                f"{self.RESET_ALL}"
+            )
+            print(
+                f"{self.BLUE}Guess the number between 1 and 10 to win!"
+                f"{self.RESET_ALL}"
+            )
+            print(
+                f"{self.BLUE}Enter 'quit' to exit the game.\n"
+                f"{self.RESET_ALL}"
+            )
             while True:
                 try:
                     # Check if the player has run out of attempts.
                     if attempts == 0:
-                        print(f"{self.RED}Game Over! You ran out of attempts.{self.RESET_ALL}")
+                        print(
+                            f"{self.RED}Game Over! You ran out of attempts."
+                            f"{self.RESET_ALL}"
+                        )
                         print(f"The number was: {number}\n")
                         break
 
                     guess = input("Enter your guess: ")
 
                     if guess == "quit":
-                        print(f"{self.GREEN}Thanks for playing!\n{self.RESET_ALL}")
+                        print(
+                            f"{self.GREEN}Thanks for playing!\n"
+                            f"{self.RESET_ALL}"
+                        )
                         return
 
                     # Check if the 'guess' is a valid number.
@@ -359,7 +430,7 @@ class WordTriadGame:
                 print(f"{self.BLUE}Goodbye!{self.RESET_ALL}")
                 break  # Exit the loop and end the program
             else:
-                # If the user enters an invalid choice, display an error message
+                # If the user enters an invalid choice, display error message
                 print(
                     f"{self.YELLOW}\nInvalid choice! "
                     f"Please enter a number between 1 and 4."
