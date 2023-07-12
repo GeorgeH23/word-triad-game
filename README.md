@@ -58,7 +58,16 @@
       ![Exit](documentation/exit.png)
 
 ## Data Model
-
+-   ### Google Sheets:
+    - is used as a data source for storing the word lists for the Scramble and Hangman games.
+-   ### Google API:
+    - is used to access and retrieve data from Google Sheets document.
+    - a service account and credentials are required for authentication and authorization.
+-   ### Data Structure:
+    - the word lists is stored in a dataFrame.
+    - each row representing a word with an associated metadata such as difficulty level.
+-   ### In-memory Data:
+    - during the gameplay, the selected word list, the used words and scores are stored in memory.
 
 ## Issues and Bugs
 -   ### Solved
