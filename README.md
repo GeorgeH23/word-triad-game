@@ -209,6 +209,3 @@ To deploy this game to Heroku Pages from GitHub repository, the following steps 
 ### Content 
 - The ReadME file was inspired from my first project [Travel Addict](https://github.com/GeorgeH23/travel-addict/blob/main/README.md) and [Ultimate Battleships](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+PE_PAGPPF+2021_Q2/courseware/b3378fc1159e43e3b70916fdefdfae51/605f34e006594dc4ae19f5e60ec75e2e/)
 - All other content was written by the developer
-
-
-https://docs.google.com/spreadsheets/d/16ijUIiLiN7GW1yUDY_z4mYLmxeQiJapEfyfJeMbvv2o/edit#gid=0
