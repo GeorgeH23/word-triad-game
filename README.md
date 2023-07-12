@@ -43,11 +43,11 @@ Let's jump into the world of words and start playing the Word Triad Game!
 
 -   __Scramble Game__
     - The first option is ScrambleGame.
-        ![Scramble](documentation/scramble.png)
+      ![Scramble](documentation/scramble.png)
 
     - The user has to choose the difficulty level of the game.
     - Invalid message will appear if the option is not written correctly.
-        ![Scramble](documentation/scramble-invalid-choice.png)
+      ![Scramble](documentation/scramble-invalid-choice.png)
 
     - If typing 'quit' will go back to the main menu.
     - The user has to unscramble the word displayed to achive points.
@@ -55,32 +55,32 @@ Let's jump into the world of words and start playing the Word Triad Game!
     - A message will let the user know if he unscramble the word correctly or not.
     - At the end of the game the user see a 'thank you' message and the score.
     - The user has the option to 'play again' or to 'go back' to the main menu.
-        ![Scramble](documentation/scramble-play-again.png.png)
-        ![Scramble](documentation/scramble-back-menu.png.png)
+      ![Scramble](documentation/scramble-play-again.png.png)
+      ![Scramble](documentation/scramble-back-menu.png.png)
 
 -   __Hangman Game__
     - The second option is HangmanGame.
-        ![Hangman](documentation/hangman.png)
+      ![Hangman](documentation/hangman.png)
 
     - The user has to choose the difficulty level of the game.
     - Invalid message will appear if the option is not written correctly.
-        ![Hangman](documentation/hangman-invalid-choice.png)
+      ![Hangman](documentation/hangman-invalid-choice.png)
 
     - If typing 'quit' will go back to the main menu.
     - Will be displayed to the user: the attempts remaining, a list with the gussed letters, the word to guess will be hiden by '_' and an input.
     - A message will let the user know if he guessed the letter typed correctly or not.
     - Invalid message will appear if the user is typing a number or multiple letters.
-        ![Hangman](documentation/hangman-gameplay-messages.png)
+      ![Hangman](documentation/hangman-gameplay-messages.png)
 
     - At the end of the game the user see a 'thank you' message and the score.
     - The user has the option to 'play again' or to 'go back' to the main menu.
     - Invalid message will appear if the option is not written correctly.
-        ![Hangman](documentation/hangman-play-again.png)
-        ![Hangman](documentation/hangman-back-menu.png)
+      ![Hangman](documentation/hangman-play-again.png)
+      ![Hangman](documentation/hangman-back-menu.png)
 
 -   __Guessing Game__
     - The third option is GuessingGame.
-        ![Guessing](documentation/guessing.png)
+      ![Guessing](documentation/guessing.png)
     - A welcome message is displayed.
     - The user need to guess a randomly generated number between 1 and 10.
     - A message will let the user know if the typed number is to low, to high or correct.
@@ -88,12 +88,12 @@ Let's jump into the world of words and start playing the Word Triad Game!
     - Invalid message will be displayed if you choose another charachter then a number.
     - At the end of the game the user see a 'thank you' message.
     - The user has the option to 'play again' or to 'go back' to the main menu.
-        ![Guessing](documentation/guessing-invalid-message.png)
+      ![Guessing](documentation/guessing-invalid-message.png)
 
 -   __Exit__
     - The user can choose to exit the game at any time
     - A specific message will be displayed.
-        ![Exit](documentation/exit.png)
+      ![Exit](documentation/exit.png)
 
 ## Data Model
 -   ### Google Sheets:
@@ -129,7 +129,7 @@ Let's jump into the world of words and start playing the Word Triad Game!
 
 - [Python Validator](https://pep8ci.herokuapp.com/#)
     - result for run.py
-        ![Python results run](documentation/run-validation.png)
+      ![Python results run](documentation/run-validation.png)
 
 
 ### User Tests
