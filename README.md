@@ -1,6 +1,6 @@
 <h1 align="center">Word Triad Game</h1>
 
-[View the live project here]()
+[View the live project here](https://word-triad-game-3b5b3474f6c7.herokuapp.com/)
 
 ## Index – Table of Contents
 * [Introduction](#introduction)
