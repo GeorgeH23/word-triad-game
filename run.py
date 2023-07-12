@@ -58,7 +58,10 @@ class WordTriadGame:
             print(f"{i+1}. {difficulty}")
 
         while True:
-            difficulty_choice = input(f"\nChoose a difficulty level (1-{len(difficulties)}):\n")
+            difficulty_choice = input(
+                f"\nChoose a difficulty level "
+                f"(1-{len(difficulties)}):\n"
+            )
 
             if difficulty_choice.lower() == "quit":
                 self.main_fcn()
@@ -101,7 +104,9 @@ class WordTriadGame:
 
         def play_game():
             # Filter the words from google sheet based on difficulty
-            difficulty_words = words_df[words_df["difficulty"] == selected_difficulty]
+            difficulty_words = words_df[
+                words_df["difficulty"] == selected_difficulty
+            ]
 
             # Retrieve data from the 'words' column from the google sheet
             words = difficulty_words["words"].tolist()
@@ -158,14 +163,20 @@ class WordTriadGame:
             # After completing a game round, prompt for the next action.
             while True:
                 try:
-                    next_action = input("Enter 'play' to play again or 'menu' to go back to the menu:\n")
+                    next_action = input(
+                        f"Enter 'play' to play again or "
+                        f"'menu' to go back to the menu:\n"
+                    )
                     if next_action == "play":
                         play_game()  # Restart the game
                         break
                     elif next_action == "menu":
                         return  # Go back to the menu
                     else:
-                        raise ValueError("Invalid input! Please enter 'play' or 'menu'.")
+                        raise ValueError(
+                            f"Invalid input! "
+                            f"Please enter 'play' or 'menu'."
+                        )
 
                 except ValueError as e:
                     print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
@@ -196,7 +207,9 @@ class WordTriadGame:
         selected_difficulty = self.choose_difficulty(difficulties)
 
         def play_game():
-            difficulty_words = words_df[words_df["difficulty"] == selected_difficulty]
+            difficulty_words = words_df[
+                words_df["difficulty"] == selected_difficulty
+            ]
             words = difficulty_words["words"].tolist()
 
             used_words = set()
@@ -261,8 +274,10 @@ class WordTriadGame:
                             guessed_letters.add(guess)
 
                             if guess in word:
-                                # Update the hidden_word with the correctly guessed letter.
-                                hidden_word = self.display_word(word, guessed_letters)
+                                # Update with the correctly guessed letter.
+                                hidden_word = self.display_word(
+                                    word, guessed_letters
+                                )
                                 print(
                                     f"\n{self.GREEN}Correct guess! Word: "
                                     f"{self.YELLOW}{hidden_word}\n"
@@ -288,7 +303,10 @@ class WordTriadGame:
                                     f"{self.RESET_ALL}"
                                 )
                         else:
-                            raise ValueError("Invalid input! Please enter a single letter.")
+                            raise ValueError(
+                                f"Invalid input! "
+                                f"Please enter a single letter."
+                            )
 
                     except ValueError as e:
                         print(f"\n{self.YELLOW}{str(e)}\n{self.RESET_ALL}")
@@ -310,14 +328,20 @@ class WordTriadGame:
             # After completing a game round, prompt for the next action.
             while True:
                 try:
-                    next_action = input(f"Enter 'play' to play again or 'menu' to go back to the menu:\n")
+                    next_action = input(
+                        f"Enter 'play' to play again or "
+                        f"'menu' to go back to the menu:\n"
+                    )
                     if next_action == "play":
                         play_game()  # Restart the game
                         break
                     elif next_action == "menu":
                         return  # Go back to the menu
                     else:
-                        raise ValueError("Invalid input! Please enter 'play' or 'menu'.")
+                        raise ValueError(
+                            f"Invalid input! "
+                            f"Please enter 'play' or 'menu'."
+                        )
 
                 except ValueError as e:
                     print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
@@ -384,7 +408,9 @@ class WordTriadGame:
                             print(f"{self.YELLOW}Too high!\n{self.RESET_ALL}")
                         attempts -= 1
                     else:
-                        raise ValueError("Invalid input! Please enter a number.")
+                        raise ValueError(
+                            "Invalid input! Please enter a number."
+                        )
 
                 except ValueError as e:
                     # Handle the ValueError and display an error message.
@@ -397,13 +423,19 @@ class WordTriadGame:
                 # After completing a game round, prompt for the next action.
                 while True:
                     try:
-                        next_action = input("Enter 'play' to play again or 'menu' to go back to the menu:\n")
+                        next_action = input(
+                            f"Enter 'play' to play again or "
+                            f"'menu' to go back to the menu:\n"
+                        )
                         if next_action == "play":
                             break  # Exit the loop and restart the game.
                         elif next_action == "menu":
-                            return  # Exit the function and go back to the menu.
+                            return  # Exit the function and go to the menu.
                         else:
-                            raise ValueError("Invalid input! Please enter 'play' or 'menu'.")
+                            raise ValueError(
+                                f"Invalid input! "
+                                f"Please enter 'play' or 'menu'."
+                            )
 
                     except ValueError as e:
                         print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
