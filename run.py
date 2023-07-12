@@ -60,7 +60,7 @@ class WordTriadGame:
         while True:
             difficulty_choice = input(
                 f"\nChoose a difficulty level "
-                f"(1-{len(difficulties)}):\n"
+                f"(1-{len(difficulties)}): "
             )
 
             if difficulty_choice.lower() == "quit":
@@ -136,7 +136,7 @@ class WordTriadGame:
                     f"\nScrambled word: {self.YELLOW}{scrambled_word}"
                     f"{self.RESET_ALL}"
                 )
-                guess = input("Enter your guess:\n").lower()
+                guess = input("Enter your guess: ").lower()
 
                 if guess == "quit":
                     return
@@ -165,7 +165,7 @@ class WordTriadGame:
                 try:
                     next_action = input(
                         f"Enter 'play' to play again or "
-                        f"'menu' to go back to the menu:\n"
+                        f"'menu' to go back to the menu: "
                     )
                     if next_action == "play":
                         play_game()  # Restart the game
@@ -257,7 +257,7 @@ class WordTriadGame:
                     )
 
                     try:
-                        guess = input("Enter your guess:\n").lower()
+                        guess = input("Enter your guess: ").lower()
 
                         if guess == "quit":
                             return
@@ -330,7 +330,7 @@ class WordTriadGame:
                 try:
                     next_action = input(
                         f"Enter 'play' to play again or "
-                        f"'menu' to go back to the menu:\n"
+                        f"'menu' to go back to the menu: "
                     )
                     if next_action == "play":
                         play_game()  # Restart the game
@@ -383,7 +383,7 @@ class WordTriadGame:
                         print(f"The number was: {number}\n")
                         break
 
-                    guess = input("Enter your guess:\n")
+                    guess = input("Enter your guess: ")
 
                     if guess == "quit":
                         print(
@@ -425,7 +425,7 @@ class WordTriadGame:
                     try:
                         next_action = input(
                             f"Enter 'play' to play again or "
-                            f"'menu' to go back to the menu:\n"
+                            f"'menu' to go back to the menu: "
                         )
                         if next_action == "play":
                             break  # Exit the loop and restart the game.
@@ -444,7 +444,7 @@ class WordTriadGame:
     def main_fcn(self):
         while True:
             self.print_menu()
-            choice = input("Enter your choice (1-4):\n")
+            choice = input("Enter your choice (1-4): ")
 
             if choice == "1":
                 self.play_scramble_game()
