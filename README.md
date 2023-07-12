@@ -22,9 +22,13 @@
 ## User Experience (UX)
 
 ### User stories
-*...
-*
-*
+* As a player, I want to see a welcoming message.
+* As a player, I want to be able to select a game from the start menu.
+* As a player, I want to be able to choose a difficulty level.
+* As a player, I want to receive instructions on how to play the game.
+* As a player, I want to be challanged.
+* As a player, I want to be informed about my progress.
+* As a player, I want to be able to play multiple rounds of a game, without restarting the app.
 
 
 ## Features
