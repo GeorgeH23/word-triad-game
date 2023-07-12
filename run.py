@@ -417,7 +417,7 @@ class WordTriadGame:
                     print(f"\n{self.YELLOW}{str(e)}{self.RESET_ALL}")
                     continue
 
-            print(f"{self.GREEN}Thanks for playing!{self.RESET_ALL}")
+            print(f"{self.GREEN}Thanks for playing!\n{self.RESET_ALL}")
 
             if restart_game:
                 # After completing a game round, prompt for the next action.
